@@ -69,4 +69,8 @@ public class Game {
 		}
 	}
 	
+	public boolean isEmpty(int i,int j) {
+		return matrix[i][j] == "-";
+	}
+	
 }

@@ -28,7 +28,7 @@ public class main {
 				currentPlayer = player2;
 			}
 			
-			System.out.println("(undo/redo/"+currentPlayer.getSymbole()+")");
+			System.out.println("(undo/redo/"+currentPlayer.getSymbole()+")\n");
 			
 			 
 			
@@ -36,19 +36,28 @@ public class main {
 				String console = reader.readLine();
 				
 				if(currentPlayer.getSymbole().equals(console)) {
-					System.out.println("please enter line");
-					String line = reader.readLine();
-					int i = Integer.parseInt(line);
-					System.out.println("please enter column");
-					String column = reader.readLine();
-					int j = Integer.parseInt(column);
-					
-					currentPlayer.play(i, j);
-					
-					if(Game.getGame().checkWin(currentPlayer.getSymbole())) {
-						System.out.println(currentPlayer.getName()+" won the game !");
-						break;
+					try {
+						System.out.println("please enter line\n");
+						String line = reader.readLine();
+						int i = Integer.parseInt(line);
+						System.out.println("please enter column\n");
+						String column = reader.readLine();
+						int j = Integer.parseInt(column);
+						if(Game.getGame().isEmpty(i, j)) {
+							currentPlayer.play(i, j);
+							if(Game.getGame().checkWin(currentPlayer.getSymbole())) {
+								System.out.println(currentPlayer.getName()+" won the game !");
+								break;
+							}
+						}
+						System.out.println("please enter a valid line and column");
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println("please enter a valid line and column");
 					}
+					
+					
+					
 				}
 				else if ("redo".equals(console)) {
 					CommandManager.getCommandeManager().redo();
